@@ -7,6 +7,7 @@ import java.util.UUID;
 
 
 @Entity
+
 @Table(name = "students")
 public class Students {
     @Id
@@ -21,5 +22,7 @@ public class Students {
     private String lastName;
     @Column(name = "School")
     private String school;
+    @Column(name = "email")
+    private String email;
 
 }
