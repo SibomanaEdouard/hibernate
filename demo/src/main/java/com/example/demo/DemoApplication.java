@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Repositories.EmployeeRepository;
 import com.example.demo.Repositories.PersonRepository;
 import com.example.demo.models.Person;
 import org.springframework.boot.CommandLineRunner;
@@ -17,18 +18,18 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 @Bean
-	CommandLineRunner commandLineRunner(PersonRepository personRepository){
+	CommandLineRunner commandLineRunner(EmployeeRepository employeeRepository){
 		return  args ->{
-			Person person=new Person("Muhire","Lambert","muhirelambert@gmail.com");
-			Person person1=new Person("Mukama","John","mukamaloui@gmail.com");
-			Person person2=new Person("kamali","Jean","kamalijohn@gmail.com");
-			Person person3=new Person("Kagabo","John","kagabo@gmail.com");
-			List<Person> ps=new ArrayList<Person>();
-			ps.add(person1);
-			ps.add(person2);
-			ps.add(person3);
-			ps.add(person);
-			personRepository.saveAll(ps);
+//			Person person=new Person("Muhire","Lambert","muhirelambert@gmail.com");
+//			Person person1=new Person("Mukama","John","mukamaloui@gmail.com");
+//			Person person2=new Person("kamali","Jean","kamalijohn@gmail.com");
+//			Person person3=new Person("Kagabo","John","kagabo@gmail.com");
+//			List<Person> ps=new ArrayList<Person>();
+//			ps.add(person1);
+//			ps.add(person2);
+//			ps.add(person3);
+//			ps.add(person);
+//			personRepository.saveAll(ps);
 
 
 
