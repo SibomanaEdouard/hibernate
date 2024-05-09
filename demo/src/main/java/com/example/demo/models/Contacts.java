@@ -48,4 +48,14 @@ public class Contacts {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Contacts(String firstname, String lastname, String email, String phone) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.phone = phone;
+    }
+    public Contacts() {
+        // Default constructor
+    }
 }

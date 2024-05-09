@@ -1,14 +1,14 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 
 import java.util.List;
 
 @Entity
 @Table(name = "producers")
 public class Producers {
-    @UUID
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
@@ -17,7 +17,9 @@ public class Producers {
     Contacts contacts;
 
 
-    @OneToMany(mappedBy = "producer")
+
+
+    @OneToMany(mappedBy = "producer" ,cascade = CascadeType.ALL)
     private List<Products> products;
 
 
@@ -61,5 +63,14 @@ public class Producers {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public Producers( Contacts contacts, Company company) {
+        this.contacts = contacts;
+        this.company = company;
+    }
+
+    public Producers(){
+        //this is default constructors
     }
 }

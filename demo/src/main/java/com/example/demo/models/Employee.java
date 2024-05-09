@@ -1,13 +1,15 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UUID;
+
+import java.util.Optional;
+import java.util.UUID;
 
 
 @Entity
 @Table(name = "employee")
 public class Employee {
-    @UUID
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
@@ -15,15 +17,14 @@ public class Employee {
     Contacts contacts;
 
     @ManyToOne
-    @JoinColumn(name = "company_id")
-    Company company;
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private Company company;
     @Column(name = "salary")
     private double salary;
 
     public UUID getId() {
         return id;
     }
-
     public void setId(UUID id) {
         this.id = id;
     }
@@ -48,7 +49,14 @@ public class Employee {
         return company;
     }
 
-    public void setCompany(Company company) {
+    public void setCompanyId(Company company) {
         this.company = company;
+    }
+
+
+    public Employee(Contacts contacts, Company company, double salary) {
+        this.contacts = contacts;
+        this.company = company;
+        this.salary = salary;
     }
 }

@@ -1,21 +1,23 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 
 @Entity
 @Table(name = "customers")
 public class Customers {
-    @UUID
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private  UUID id;
+    private UUID id;
 
     @Column(name = "productName")
     private String productName;
 
     @Column(name = "companyName")
     private String companyName;
+
+
 
     @Embedded
     Contacts contacts;
@@ -49,6 +51,12 @@ public class Customers {
     }
 
     public void setContacts(Contacts contacts) {
+        this.contacts = contacts;
+    }
+
+    public Customers(String productName, String companyName, Contacts contacts) {
+        this.productName = productName;
+        this.companyName = companyName;
         this.contacts = contacts;
     }
 }

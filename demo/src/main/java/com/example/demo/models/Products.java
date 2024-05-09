@@ -2,21 +2,22 @@ package com.example.demo.models;
 
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 
 @Entity
 @Table(name = "products")
 public class Products {
-    @UUID
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private  UUID id;
+    private UUID id;
 
     @Column(name = "name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "producer_id") // Assuming this is the foreign key column in the products table
+    @JoinColumn(name = "producer_id" ,referencedColumnName = "id") //this is the foreign key to relate product and its producer
+
     private Producers producer;
 
     public UUID getId() {
@@ -40,6 +41,11 @@ public class Products {
     }
 
     public void setProducer(Producers producer) {
+        this.producer = producer;
+    }
+
+    public Products( String name, Producers producer) {
+        this.name = name;
         this.producer = producer;
     }
 }

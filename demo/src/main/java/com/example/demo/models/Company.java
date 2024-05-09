@@ -1,14 +1,15 @@
 package com.example.demo.models;
 
-import jakarta.persistence.*;
-import org.hibernate.validator.constraints.UUID;
 
+import jakarta.persistence.*;
+import java.util.UUID;
+import jakarta.persistence.CascadeType;
 import java.util.List;
 
 @Entity
 @Table(name = "company")
 public class Company {
-    @UUID
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
@@ -22,12 +23,15 @@ public class Company {
     @Column(name = "companyEmail")
     private String company_email;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
     private List<Employee> employees;
 
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
     private List<Producers> producers;
+
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
+    private List<Transaction> transactions;
 
     public UUID getId() {
         return id;
@@ -75,5 +79,25 @@ public class Company {
 
     public void setProducers(List<Producers> producers) {
         this.producers = producers;
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public Company(String company_name, String company_phone, String company_email) {
+//        , List<Employee> employees, List<Producers> producers
+        this.company_name = company_name;
+        this.company_phone = company_phone;
+        this.company_email = company_email;
+//        this.employees = employees;
+//        this.producers = producers;
+    }
+    public Company( ) {
+//default constructor
     }
 }
