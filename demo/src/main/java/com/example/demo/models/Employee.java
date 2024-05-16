@@ -2,7 +2,6 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -58,5 +57,9 @@ public class Employee {
         this.contacts = contacts;
         this.company = company;
         this.salary = salary;
+
+    }
+
+    public Employee() {
     }
 }
