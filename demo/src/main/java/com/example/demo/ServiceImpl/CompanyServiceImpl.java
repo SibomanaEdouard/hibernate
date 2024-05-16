@@ -4,7 +4,7 @@ import com.example.demo.Dto.CreateNewCompanyDto;
 import com.example.demo.Repositories.CompanyRepository;
 import com.example.demo.Response.ApiResponse;
 import com.example.demo.Response.CompanyResponse;
-import com.example.demo.Services.EmployeeService;
+import com.example.demo.Services.CompanyService;
 import com.example.demo.models.Company;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +12,12 @@ import org.apache.coyote.BadRequestException;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Builder
 @RequiredArgsConstructor
-public class EmployeeServiceImpl implements EmployeeService {
+public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
 
     @Override
@@ -55,6 +57,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+
+
     // Validate the input
     private void validateInput(CreateNewCompanyDto dto) throws BadRequestException {
         if(dto.getCompany_email() == null || dto.getCompany_name() == null || dto.getCompany_phone() == null) {
@@ -70,4 +74,36 @@ public class EmployeeServiceImpl implements EmployeeService {
         company.setCompany_phone(dto.getCompany_phone());
         return company;
     }
+
+    @Override
+    public ApiResponse<Object> getAllCompanies() throws Exception {
+        List<Company> companies = companyRepository.findAll();
+        try {
+            if (!companies.isEmpty()) {
+                // Assuming you want the first company in the list
+                Company company = companies.get(0);
+
+                // Form a response
+                CompanyResponse response = new CompanyResponse();
+                response.setMessage("Wow I am GOAT!");
+                response.setCompany(company);
+
+                // Return success response
+                return ApiResponse.builder()
+                        .data(response)
+                        .success(true)
+                        .build();
+            } else {
+                // If no companies were found, return an appropriate response
+                return ApiResponse.builder()
+                        .message("No companies found")
+                        .success(false)
+                        .build();
+            }
+        } catch (Exception e) {
+            throw new Exception("Error retrieving companies: " + e.getMessage());
+        }
+    }
+
+
 }
