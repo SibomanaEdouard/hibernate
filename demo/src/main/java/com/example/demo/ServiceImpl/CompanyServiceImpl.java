@@ -1,11 +1,14 @@
 package com.example.demo.ServiceImpl;
 
 import com.example.demo.Dto.CreateNewCompanyDto;
+import com.example.demo.Enum.Role;
 import com.example.demo.Repositories.CompanyRepository;
 import com.example.demo.Response.ApiResponse;
 import com.example.demo.Response.CompanyResponse;
+import com.example.demo.Response.UserResponse;
 import com.example.demo.Services.CompanyService;
 import com.example.demo.models.Company;
+import com.example.demo.utils.GetLoggedUser;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -19,10 +22,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
+    private final GetLoggedUser getLoggedUser;
 
     @Override
     public ApiResponse<Object> createNewCompany(CreateNewCompanyDto dto) throws Exception {
         try {
+            UserResponse userResponse=getLoggedUser.getLoggedUser();
+            //let me check if the user is logged
+            if(userResponse==null){
+
+                return ApiResponse.builder()
+                        .data("Login to conitue.....")
+                        .success(false)
+                        .build();
+            }
+            if(userResponse.getRole()!= Role.MANAGER){
+                return ApiResponse.builder()
+//                        .data(resp)
+                        .data("You are not allowed to do this service please !")
+                        .success(false)
+                        .build();
+            }
             // Validate the input
             validateInput(dto);
 

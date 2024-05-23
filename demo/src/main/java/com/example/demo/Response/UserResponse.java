@@ -1,20 +1,28 @@
-package com.example.demo.Dto;
+package com.example.demo.Response;
+
+
 
 
 import com.example.demo.Enum.Role;
 import lombok.*;
 
-@Setter
-@Getter
+import java.util.UUID;
+
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Data
-public class RegisterUserDto {
+//@Setter
+//@Getter
+public class UserResponse {
     private String firstname;
     private String lastname;
     private String email;
-    private String password;
     private Role role;
+    public UUID id;
 
+//    public UUID getId() {
+//        return id;
+//    }
 }
+

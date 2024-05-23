@@ -14,15 +14,18 @@ import java.util.List;
 import java.util.UUID;
 
 @Table(name = "users")
+//@NoArgsConstructor
 @Entity
 @Setter
 @Getter
-@Builder
+//@Builder
 @Data
+@NoArgsConstructor
+
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false)
+    @Column(name = "id")
     private UUID id;
 
     @Column(nullable = false)
@@ -38,7 +41,7 @@ public class User implements UserDetails {
     private String password;
 
     @Enumerated
-    private Role role=Role.CLIENT;
+    private Role role;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
