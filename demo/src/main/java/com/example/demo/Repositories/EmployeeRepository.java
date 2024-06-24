@@ -9,31 +9,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
-    // Method to find employee by ID
-    Optional<Employee> findById(UUID id);
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    // Method to find all employees
-    List<Employee> findAll();
-//    List<Employee> findByLastName(String lastname);
+    Optional<Employee> findById(long id);
 
-    // Method to save an employee
-    Employee save(Employee employee);
-
-    // Method to delete an employee by ID
-    void deleteById(UUID id);
-
-    // Method to find employees by company
-//    List<Employee> findByCompany(Company company);
-
-    // Method to find employees by salary greater than a certain value
-    List<Employee> findBySalaryGreaterThan(double salary);
-
-    // Method to find employees by salary less than a certain value
-    List<Employee> findBySalaryLessThan(double salary);
-
-    // Method to find employees by salary between a range of values
-    List<Employee> findBySalaryBetween(double minSalary, double maxSalary);
-
-
+    void deleteById(long id);
 }
