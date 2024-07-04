@@ -26,21 +26,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    //this is to update the employee
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {
             Employee existingEmployee = optionalEmployee.get();
-            existingEmployee.setFirstname(employee.getFirstname());
-            existingEmployee.setLastname(employee.getLastname());
-            existingEmployee.setInstitution(employee.getInstitution());
-            existingEmployee.setPosition(employee.getPosition());
+
+            if (employee.getFirstname() != null) {
+                existingEmployee.setFirstname(employee.getFirstname());
+            }
+            if (employee.getLastname() != null) {
+                existingEmployee.setLastname(employee.getLastname());
+            }
+            if (employee.getInstitution() != null) {
+                existingEmployee.setInstitution(employee.getInstitution());
+            }
+            if (employee.getPosition() != null) {
+                existingEmployee.setPosition(employee.getPosition());
+            }
 
             return employeeRepository.save(existingEmployee);
         } else {
             throw new RuntimeException("Employee not found with id: " + id);
         }
     }
+
 
 
     @Override

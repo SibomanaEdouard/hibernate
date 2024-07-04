@@ -12,12 +12,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/v1/employess")
+@RequestMapping(path = "employees")
 public class EmployeeController {
 
     private final EmployeeServiceImpl employeeServiceImpl;
 
-    @PostMapping("/create_emp")
+    @PostMapping("/register")
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeServiceImpl.createEmployee(employee);
     }
@@ -28,7 +28,7 @@ public class EmployeeController {
         return ResponseEntity.ok(employees);
     }
 
-    @GetMapping("/employe/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id) {
         Employee employee = employeeServiceImpl.getEmployeeById(id);
         if (employee != null) {
