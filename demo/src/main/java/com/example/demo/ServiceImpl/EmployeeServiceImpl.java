@@ -16,8 +16,10 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
+    //this is to register employee
     @Override
     public Employee createEmployee(Employee employee) {
+        //this is to check if the input from user is null
         if(employee!=null) {
 
             return employeeRepository.save(employee);
@@ -53,12 +55,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    //this is to get all employees from the database
 
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
+    //this is to get employee by id
     @Override
     public Employee getEmployeeById(Long id) {
 
@@ -66,6 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return optionalEmployee.orElse(null);
     }
 
+    //this is to delete employee
     @Override
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);

@@ -17,17 +17,20 @@ public class EmployeeController {
 
     private final EmployeeServiceImpl employeeServiceImpl;
 
+    //this is  the controller to register the employee
     @PostMapping("/register")
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeServiceImpl.createEmployee(employee);
     }
 
+    //this is the one to get all employees
     @GetMapping("/all")
     public ResponseEntity<Object> getAllEmployees() {
         List<Employee> employees = employeeServiceImpl.getAllEmployees();
         return ResponseEntity.ok(employees);
     }
 
+    //this is the one to get employee by id
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id) {
         Employee employee = employeeServiceImpl.getEmployeeById(id);
