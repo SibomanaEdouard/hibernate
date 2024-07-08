@@ -3,7 +3,6 @@ import com.example.demo.Repositories.EmployeeRepository;
 import com.example.demo.Services.EmployeeService;
 import com.example.demo.models.Employee;
 import  lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,11 +34,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (optionalEmployee.isPresent()) {
             Employee existingEmployee = optionalEmployee.get();
 
-            if (employee.getFirstname() != null) {
-                existingEmployee.setFirstname(employee.getFirstname());
+            if (employee.getFirstName() != null) {
+                existingEmployee.setFirstName(employee.getFirstName());
             }
-            if (employee.getLastname() != null) {
-                existingEmployee.setLastname(employee.getLastname());
+            if (employee.getLastName() != null) {
+                existingEmployee.setLastName(employee.getLastName());
             }
             if (employee.getInstitution() != null) {
                 existingEmployee.setInstitution(employee.getInstitution());
@@ -72,8 +71,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     //this is to delete employee
     @Override
-    public void deleteEmployee(Long id) {
-        employeeRepository.deleteById(id);
-
+    public String deleteEmployee(Long id) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (optionalEmployee.isPresent()) {
+            employeeRepository.deleteById(id);
+            return "Employee deleted successfully.";
+        } else {
+            return "Employee not found with id: " + id;
+        }
     }
+
 }
