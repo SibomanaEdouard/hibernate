@@ -19,9 +19,9 @@ public class Employee {
     @Column(name = "id")
     private long id;
     @Column(name = "firstname",nullable = false)
-    private String firstname;
+    private String firstName;
     @Column(name = "lastname", nullable=false)
-    private String lastname;
+    private String lastName;
     @Column(nullable=false)
     private  String institution;
     @Column(nullable=false)
